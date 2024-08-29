@@ -5,10 +5,11 @@ import java.util.Set;
 import java.util.HashMap;
 
 public class Colecciones {
+
     ArrayList<String> cars ;
     String[] bikes;
     Set<String> bicicles;
-    HashMap<Integer, String> transport;
+    public HashMap<Integer, String> transport;
 
     public Colecciones(){
         this.cars = new ArrayList<String>();
@@ -39,30 +40,38 @@ public class Colecciones {
 
     public HashMap<Integer, String> obtenerHash() {
         HashMap<Integer, String> resultMap = new HashMap<>();
-        HashSet<String> seen = new HashSet<>();  // Para evitar duplicados
         int count = 1;
 
         // Agregar elementos de cars
         for(String car : cars) {
-            if(car != null && !car.isEmpty() && seen.add(car)) {
+            if(car != null && !car.isEmpty() && !resultMap.containsValue(car)) {
                 resultMap.put(count++, car);
             }
         }
 
         // Agregar elementos de bikes
         for(String bike : bikes) {
-            if(bike != null && !bike.isEmpty() && seen.add(bike)) {
+            if(bike != null && !bike.isEmpty() && !resultMap.containsValue(bike)) {
                 resultMap.put(count++, bike);
             }
         }
 
         // Agregar elementos de bicicles
         for(String bicycle : bicicles) {
-            if(bicycle != null && !bicycle.isEmpty() && seen.add(bicycle)) {
+            if(bicycle != null && !bicycle.isEmpty() && !resultMap.containsValue(bicycle)) {
                 resultMap.put(count++, bicycle);
             }
         }
+        // Agregar elementos de transport
+        for(String value : transport.values()) {
+            if(value != null && !value.isEmpty() && !resultMap.containsValue(value)) {
+                resultMap.put(count++, value);
+            }
+        }
 
-        return resultMap;
+        this.transport = resultMap;
+    
+
+        return this.transport;
     }
 }
